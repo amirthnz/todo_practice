@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Tasks
+{% endblock title %}
+    
+
+{% block content %}
+    <center><p><strong><h1>کارهای من</h1></strong></p></center>
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>محتوا</th>
+            <th>عملیات</th>
+            <th>حذف</th>
+        </tr>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><span class="{% if task.done %}done{% else %}undone{% endif %}"><a href="{% url 'edit' task.id %}">{{ task.content }}</a></span></td>
+                {% comment %} <td><a href="{% url 'edit' task.id %}">Edit</a></td> {% endcomment %}
+                <td>
+                    <form method="post" action="{% url 'operate' task.id %}">
+                        {% csrf_token %}
+                        <input type="submit" value="{% if task.done %}اتمام{% else %}ناتمام{% endif %}">
+                    </form>
+                </td>
+                {% comment %} <td><a href="{% url 'delete' task.id %}">Delete</a></td> {% endcomment %}
+                <td>
+                    <form method="post" action="{% url 'delete' task.id %}">
+                        {% csrf_token %}
+                        <input type="submit" value="حذف">
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <center><p><h1><a href="{% url 'add' %}">افزودن</a></h1></p></center>
+
+{% endblock content %}
+    

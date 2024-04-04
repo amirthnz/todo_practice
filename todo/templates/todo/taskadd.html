@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    کارها
+{% endblock title %}
+    
+
+{% block content %}
+    {% if task %}
+        <strong><h1>ویرایش کار</h1></strong>
+    {% else %}
+        <strong><h1>افزودن کار جدید</h1></strong>
+    {% endif %}
+
+
+    <form method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="{% if task %}ویرایش{% else %}افزودن{% endif %}">
+    </form>
+    
+
+{% endblock content %}
+    
