@@ -2,7 +2,6 @@ from django.db import models
 
 # Create your models here.
 class Task(models.Model):
-    title = models.CharField(max_length=150, verbose_name='عنوان')
     content = models.CharField(max_length=300, verbose_name='محتوا')
     done = models.BooleanField(default=False, verbose_name='انجام شده')
     created = models.DateTimeField(auto_now_add=True)

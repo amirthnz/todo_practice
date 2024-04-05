@@ -15,7 +15,6 @@ def taskadd(request, pk=None):
     task = None
     if pk:
         task = get_object_or_404(Task, id=pk)
-        print(task.title)
     if request.method == 'POST':
         form = TaskForm(data=request.POST, instance=task)
         if form.is_valid():
